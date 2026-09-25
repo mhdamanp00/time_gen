@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.timetable.controller.UserDashboardController"
+      spacing="20" style="-fx-padding:24;">
+
+    <!-- Header -->
+    <VBox spacing="4">
+        <Label text="Find a timetable" styleClass="section-title"/>
+        <Label text="Search by class, teacher, subject, or day. Combine filters to narrow your results, then download a PDF."
+               styleClass="section-subtitle" wrapText="true"/>
+    </VBox>
+
+    <!-- Search Bar Card -->
+    <VBox styleClass="form-card" spacing="16">
+        <Label text="Search Filters" styleClass="field-label"/>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Class / Section" styleClass="field-label"/>
+                <TextField fx:id="classFilter" promptText="e.g. CSE-A" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Teacher" styleClass="field-label"/>
+                <ComboBox fx:id="teacherFilter" promptText="All teachers" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Subject Code" styleClass="field-label"/>
+                <TextField fx:id="subjectFilter" promptText="e.g. CS301" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Working Day" styleClass="field-label"/>
+                <ComboBox fx:id="dayFilter" promptText="All days" maxWidth="Infinity"/>
+            </VBox>
+        </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="Search timetables" styleClass="button,accent-btn" onAction="#search"/>
+            <Button text="✖  Clear Filters" styleClass="button" onAction="#clearFilters"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Download PDF" styleClass="button,success-btn" onAction="#exportPDF"/>
+        </HBox>
+        <Label fx:id="resultCountLabel" text="" style="-fx-text-fill:#64748b; -fx-font-size:12px;"/>
+    </VBox>
+
+    <!-- Results Table -->
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <Label text="Schedule Results" styleClass="field-label"/>
+        <TableView fx:id="resultsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn text="Class" prefWidth="90">
+                    <cellValueFactory><PropertyValueFactory property="className"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Subject" prefWidth="200">
+                    <cellValueFactory><PropertyValueFactory property="subjectName"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Teacher" prefWidth="160">
+                    <cellValueFactory><PropertyValueFactory property="teacherName"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Room" prefWidth="90">
+                    <cellValueFactory><PropertyValueFactory property="roomNumber"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Day" prefWidth="110">
+                    <cellValueFactory><PropertyValueFactory property="dayName"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Period" prefWidth="200">
+                    <cellValueFactory><PropertyValueFactory property="periodInfo"/></cellValueFactory>
+                </TableColumn>
+            </columns>
+            <placeholder><Label text="Use filters above and click Search." styleClass="text-muted"/></placeholder>
+        </TableView>
+    </VBox>
+</VBox>

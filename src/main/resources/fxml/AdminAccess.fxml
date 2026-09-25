@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.timetable.controller.AdminAccessController"
+           styleClass="content-area">
+    <VBox maxWidth="460" alignment="CENTER" spacing="18">
+        <Label text="🔐" style="-fx-font-size:42px;"/>
+        <Label fx:id="heading" text="Admin sign in" styleClass="section-title"/>
+        <Label fx:id="description" wrapText="true" textAlignment="CENTER"
+               styleClass="section-subtitle"/>
+
+        <VBox fx:id="setupForm" styleClass="form-card" spacing="12" maxWidth="420">
+            <Label text="Create administrator" styleClass="field-label"/>
+            <TextField fx:id="setupUsername" promptText="Choose a username"/>
+            <PasswordField fx:id="setupPassword" promptText="Password (at least 8 characters)"/>
+            <PasswordField fx:id="confirmPassword" promptText="Confirm password" onAction="#createAdmin"/>
+            <Button text="Create account and continue" onAction="#createAdmin"
+                    styleClass="button,accent-btn" maxWidth="Infinity"/>
+        </VBox>
+
+        <VBox fx:id="loginForm" styleClass="form-card" spacing="12" maxWidth="420">
+            <Label text="Administrator account" styleClass="field-label"/>
+            <TextField fx:id="loginUsername" promptText="Username"/>
+            <PasswordField fx:id="loginPassword" promptText="Password" onAction="#login"/>
+            <Button text="Sign in to admin portal" onAction="#login"
+                    styleClass="button,accent-btn" maxWidth="Infinity"/>
+        </VBox>
+        <Label fx:id="messageLabel" wrapText="true" managed="false" visible="false"/>
+        <Label text="Your timetable search is available without administrator sign-in."
+               wrapText="true" styleClass="text-muted"/>
+    </VBox>
+</StackPane>
