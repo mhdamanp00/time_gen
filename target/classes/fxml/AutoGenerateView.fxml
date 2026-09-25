@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.timetable.controller.AutoGenerateController"
+      spacing="20" style="-fx-padding:0;">
+
+    <VBox spacing="4">
+        <Label text="⚡ Auto-Generate Timetable" styleClass="section-title"/>
+        <Label text="Automatically assign subjects to day/period slots using constraint-aware greedy scheduling"
+               styleClass="section-subtitle" wrapText="true"/>
+    </VBox>
+
+    <!-- Settings Card -->
+    <VBox styleClass="form-card" spacing="16">
+        <Label text="Generation Settings" styleClass="field-label"/>
+
+        <HBox spacing="24" alignment="TOP_LEFT">
+            <!-- Assignments column -->
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <Label text="Assignment Rows  (Class | Subject | Teacher)" styleClass="field-label"/>
+                <Label text="One row per line — format:  ClassName,SubjectCode,TeacherEmail"
+                       style="-fx-text-fill:#64748b; -fx-font-size:12px;" wrapText="true"/>
+                <TextArea fx:id="assignmentsArea" prefHeight="180"
+                          promptText="CSE-A,CS301,teacher@college.edu&#10;CSE-A,CS302,prof@college.edu&#10;CSE-B,CS301,teacher@college.edu"/>
+            </VBox>
+
+            <!-- Options column -->
+            <VBox spacing="12" prefWidth="240">
+                <Label text="Options" styleClass="field-label"/>
+                <CheckBox fx:id="clearFirstCheck" text="Clear existing schedule first" selected="true"
+                          style="-fx-text-fill:#cbd5e1;"/>
+                <Label text="Available Resources" styleClass="field-label" style="-fx-padding:8 0 0 0;"/>
+                <Label fx:id="statsLabel" text="Loading..." style="-fx-text-fill:#64748b; -fx-font-size:12px;" wrapText="true"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Button text="⚡  Generate Timetable" styleClass="button,accent-btn" onAction="#generate"/>
+            <Button text="🔄  Refresh Stats" styleClass="button" onAction="#refreshStats"/>
+        </HBox>
+
+        <Label fx:id="messageLabel" wrapText="true" managed="false" visible="false"/>
+    </VBox>
+
+    <!-- Results -->
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <Label text="Generation Results" styleClass="field-label"/>
+        <TableView fx:id="resultTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn text="Class" prefWidth="100">
+                    <cellValueFactory><PropertyValueFactory property="className"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Subject" prefWidth="180">
+                    <cellValueFactory><PropertyValueFactory property="subjectName"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Teacher" prefWidth="160">
+                    <cellValueFactory><PropertyValueFactory property="teacherName"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Room" prefWidth="90">
+                    <cellValueFactory><PropertyValueFactory property="roomNumber"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Day" prefWidth="100">
+                    <cellValueFactory><PropertyValueFactory property="dayName"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Period" prefWidth="170">
+                    <cellValueFactory><PropertyValueFactory property="periodInfo"/></cellValueFactory>
+                </TableColumn>
+            </columns>
+            <placeholder><Label text="Click 'Generate Timetable' to start." styleClass="text-muted"/></placeholder>
+        </TableView>
+    </VBox>
+</VBox>

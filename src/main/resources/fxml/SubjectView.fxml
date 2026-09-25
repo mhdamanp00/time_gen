@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.timetable.controller.SubjectController"
+      spacing="20" style="-fx-padding:0;">
+
+    <!-- Title -->
+    <VBox spacing="4">
+        <Label text="Subjects" styleClass="section-title"/>
+        <Label text="Manage academic subjects and courses" styleClass="section-subtitle"/>
+    </VBox>
+
+    <!-- Form Card -->
+    <VBox styleClass="form-card" spacing="14">
+        <Label text="Add / Edit Subject" styleClass="field-label"/>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Subject Name *" styleClass="field-label"/>
+                <TextField fx:id="nameField" promptText="e.g. Data Structures" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="Code *" styleClass="field-label"/>
+                <TextField fx:id="codeField" promptText="e.g. CS301" prefWidth="140"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="Credits *" styleClass="field-label"/>
+                <TextField fx:id="creditsField" promptText="e.g. 4" prefWidth="100"/>
+            </VBox>
+        </HBox>
+
+        <!-- Action Buttons -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button fx:id="saveBtn" text="💾  Save" styleClass="button,accent-btn" onAction="#save"/>
+            <Button fx:id="updateBtn" text="✏  Update" styleClass="button,warning-btn" onAction="#update" disable="true"/>
+            <Button fx:id="deleteBtn" text="🗑  Delete" styleClass="button,danger-btn" onAction="#delete" disable="true"/>
+            <Button text="✖  Clear" styleClass="button" onAction="#clear"/>
+        </HBox>
+
+        <!-- Validation message -->
+        <Label fx:id="messageLabel" styleClass="text-danger" wrapText="true" managed="false" visible="false"/>
+    </VBox>
+
+    <!-- Table -->
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <Label text="All Subjects" styleClass="field-label"/>
+        <TableView fx:id="subjectTable" VBox.vgrow="ALWAYS" onMouseClicked="#onRowSelect">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60">
+                    <cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colName" text="Name" prefWidth="280">
+                    <cellValueFactory><PropertyValueFactory property="name"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colCode" text="Code" prefWidth="120">
+                    <cellValueFactory><PropertyValueFactory property="code"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colCredits" text="Credits" prefWidth="100">
+                    <cellValueFactory><PropertyValueFactory property="credits"/></cellValueFactory>
+                </TableColumn>
+            </columns>
+            <placeholder><Label text="No subjects yet. Add one above." styleClass="text-muted"/></placeholder>
+        </TableView>
+    </VBox>
+</VBox>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.timetable.controller.TeacherController"
+      spacing="20" style="-fx-padding:0;">
+
+    <VBox spacing="4">
+        <Label text="Teachers" styleClass="section-title"/>
+        <Label text="Manage teaching staff and their subject assignments" styleClass="section-subtitle"/>
+    </VBox>
+
+    <!-- Form Card -->
+    <VBox styleClass="form-card" spacing="14">
+        <Label text="Add / Edit Teacher" styleClass="field-label"/>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Full Name *" styleClass="field-label"/>
+                <TextField fx:id="nameField" promptText="e.g. Dr. Jane Smith" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Email *" styleClass="field-label"/>
+                <TextField fx:id="emailField" promptText="e.g. jane@college.edu" maxWidth="Infinity"/>
+            </VBox>
+        </HBox>
+
+        <!-- Subject assignment list -->
+        <VBox spacing="6">
+            <Label text="Assigned Subjects (select multiple with Ctrl/Shift)" styleClass="field-label"/>
+            <ListView fx:id="subjectListView" prefHeight="120"/>
+        </VBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button fx:id="saveBtn" text="💾  Save" styleClass="button,accent-btn" onAction="#save"/>
+            <Button fx:id="updateBtn" text="✏  Update" styleClass="button,warning-btn" onAction="#update" disable="true"/>
+            <Button fx:id="deleteBtn" text="🗑  Delete" styleClass="button,danger-btn" onAction="#delete" disable="true"/>
+            <Button text="✖  Clear" styleClass="button" onAction="#clear"/>
+        </HBox>
+        <Label fx:id="messageLabel" styleClass="text-danger" wrapText="true" managed="false" visible="false"/>
+    </VBox>
+
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <Label text="All Teachers" styleClass="field-label"/>
+        <TableView fx:id="teacherTable" VBox.vgrow="ALWAYS" onMouseClicked="#onRowSelect">
+            <columns>
+                <TableColumn text="ID" prefWidth="60">
+                    <cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Name" prefWidth="220">
+                    <cellValueFactory><PropertyValueFactory property="name"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Email" prefWidth="240">
+                    <cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Subjects" prefWidth="220">
+                    <cellValueFactory><PropertyValueFactory property="subjectCodes"/></cellValueFactory>
+                </TableColumn>
+            </columns>
+            <placeholder><Label text="No teachers yet." styleClass="text-muted"/></placeholder>
+        </TableView>
+    </VBox>
+</VBox>
