@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database Connection Settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/timetable_db?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">CHANGE_ME</property>
+
+        <!-- SQL Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Auto-create/update schema -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- SQL Logging (disable in production) -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
+
+        <!-- Session Context -->
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Connection Pool -->
+        <property name="hibernate.connection.pool_size">10</property>
+
+        <!-- Entity Mappings -->
+        <mapping class="com.timetable.model.Subject"/>
+        <mapping class="com.timetable.model.Teacher"/>
+        <mapping class="com.timetable.model.Classroom"/>
+        <mapping class="com.timetable.model.WorkingDay"/>
+        <mapping class="com.timetable.model.TimePeriod"/>
+        <mapping class="com.timetable.model.ClassSchedule"/>
+        <mapping class="com.timetable.model.AdminAccount"/>
+    </session-factory>
+</hibernate-configuration>

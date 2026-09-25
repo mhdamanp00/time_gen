@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.timetable.controller.MainController"
+      stylesheets="@../css/styles.css"
+      spacing="0">
+
+    <!-- ═══ HEADER BAR ═══ -->
+    <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="16">
+        <VBox spacing="2">
+            <Label text="🗓" style="-fx-font-size:28px;"/>
+        </VBox>
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="Class Timetable Scheduler" styleClass="app-title"/>
+            <Label text="Find your class schedule or manage timetable planning" styleClass="app-subtitle"/>
+        </VBox>
+        <!-- Portal Toggle Buttons -->
+        <HBox spacing="8" alignment="CENTER_RIGHT">
+            <Button fx:id="userBtn" text="⌕  Find a timetable" styleClass="portal-btn,portal-btn-active"
+                    onAction="#showUser" maxHeight="36"/>
+            <Button fx:id="adminBtn" text="⚙  Admin login" styleClass="portal-btn"
+                    onAction="#adminAction" maxHeight="36"/>
+            <Button fx:id="logoutBtn" text="Sign out" styleClass="portal-btn"
+                    onAction="#logout" maxHeight="36" visible="false" managed="false"/>
+        </HBox>
+    </HBox>
+
+    <!-- ═══ MAIN CONTENT (dynamic) ═══ -->
+    <StackPane fx:id="contentPane" VBox.vgrow="ALWAYS">
+        <!-- Initially loaded by controller -->
+    </StackPane>
+
+    <!-- ═══ STATUS BAR ═══ -->
+    <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="12">
+        <Label text="●" style="-fx-text-fill:#94a3b8; -fx-font-size:10px;"/>
+        <Label fx:id="statusLabel" text="Search and download available timetables" styleClass="status-text"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="v1.0.0" styleClass="status-text"/>
+    </HBox>
+</VBox>
